@@ -36,7 +36,24 @@ For instance, all Map-Reduce Operations are executed in Executor(in Spark, they 
 Spark shell required memory = (Driver Memory + 384 MB) + (Number of executors * (Executor memory + 384 MB))
 Here 384 MB is maximum memory (overhead) value that may be utilized by Spark when executing jobs.
 
-# RDD - Resilient Distributed datasets
-RDD is a distributed collection of immutable data elements spread across many machines in the cluster. RDDs are a set of Java or Scala objects representing data. DataFrame – A DataFrame is a distributed collection of data organized into named columns. It is conceptually equal to a table in a relational database.
+# Data Structures in Spark - RDD - Resilient Distributed datasets, DataFrame(silimar to tables in RDBMS), Data sets
+1. RDD is a distributed collection of immutable data elements spread across many machines in the cluster. 
+   RDDs are a set of Java or Scala objects representing data. RDDs cannot take advantages of sparks advance optimizers. 
+   For example, catalyst optimizer and Tungsten execution engine. Developers optimise each RDD on the basis of its attributes.
+2. DataFrame – A DataFrame is a distributed collection of data organized into named columns. 
+   It is conceptually equal to a table in a relational database. Spark DataFrame Can serialize the data into off-heap storage(in-memory) 
+   in binary format and then perform many transformations directly on this off heap memory because spark understands the schema. There is no 
+   need to use java serialization to encode the data. It provides a Tungsten physical execution backend which explicitly manages memory and 
+   dynamically generates bytecode for expression evaluation.
+3. Datasets - Quite useful to perform aggregation operation on plenty of data sets.
 
-RDDs cannot take advantages of sparks advance optimizers. For example, catalyst optimizer and Tungsten execution engine. Developers optimise each RDD on the basis of its attributes. Spark DataFrame Can serialize the data into off-heap storage(in-memory) in binary format and then perform many transformations directly on this off heap memory because spark understands the schema. There is no need to use java serialization to encode the data. It provides a Tungsten physical execution backend which explicitly manages memory and dynamically generates bytecode for expression evaluation.
+# Lazy Evaluation
+The results of transformations are not showed until explicitly invoking the actions i.e Computation happens only when action appears 
+(like display result, save output). 
+
+
+
+
+
+
+
